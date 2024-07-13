@@ -1,0 +1,30 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: abhash
+      WORDPRESS_DB_PASSWORD: abhash_pass
+      WORDPRESS_DB_NAME: abhashdb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: abhashdb
+      MYSQL_USER: abhash
+      MYSQL_PASSWORD: abhash_pass
+      MYSQL_RANDOM_ROOT_PASSWORD: '123'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
